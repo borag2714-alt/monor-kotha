@@ -1,0 +1,296 @@
+ <!DOCTYPE html>
+<html lang="as">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মনৰ কথা | Tinsukia College Portal</title>
+    
+    <style>
+        :root {
+            --navy: #0f172a;      
+            --highlight: #fb923c; /* Contrast Orange for মনৰ কথা */
+            --gold: #d69e2e;      
+            --bg: #f8fafc;        
+            --white: #ffffff;
+            --danger: #ef4444;    
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg); color: #1e293b; line-height: 1.6; }
+
+        /* Navigation */
+        nav {
+            background: var(--navy);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .brand { color: white; font-weight: bold; display: flex; align-items: center; }
+        .monor-highlight { 
+            color: var(--highlight); 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-right: 12px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        .nav-links li a:hover { color: var(--highlight); }
+
+        /* Page Layout */
+        .page-content { display: none; padding: 60px 10%; min-height: 80vh; animation: fadeIn 0.4s ease; }
+        .active-page { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards & UI */
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--navy);
+            margin-bottom: 30px;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            color: white;
+            padding: 100px 20px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--highlight);
+        }
+
+        /* Form Layout */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        label { display: block; font-weight: 700; margin-bottom: 5px; color: var(--navy); font-size: 0.9rem; }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px; }
+        .btn-submit {
+            background: var(--highlight); color: var(--navy); border: none;
+            padding: 15px 30px; border-radius: 10px; cursor: pointer;
+            font-weight: 800; width: 100%; font-size: 1.1rem;
+        }
+
+        /* History/Feed Design */
+        .feed-item { padding: 25px; border-radius: 12px; border-left: 10px solid var(--navy); background: white; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .feed-header { border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .user-info { color: var(--navy); font-size: 1.1rem; }
+        .user-info strong { color: var(--highlight); }
+        .status-badge { background: #fff7ed; color: #f59e0b; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; border: 1px solid #fed7aa; }
+        .feed-meta { font-size: 0.8rem; color: #94a3b8; margin-top: 15px; display: flex; gap: 20px; }
+
+        /* Contact Section */
+        .contact-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .contact-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .contact-table td:first-child { font-weight: bold; color: var(--navy); width: 30%; }
+
+        /* Secretary Profile Highlight */
+        .secretary-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fffbf2 100%);
+            border: 2px solid var(--gold);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 15px 35px rgba(214, 158, 46, 0.15);
+        }
+        .secretary-title {
+            color: var(--gold);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .secretary-name { color: var(--navy); font-size: 1.8rem; font-weight: 800; }
+
+        footer { background: var(--navy); color: #94a3b8; text-align: center; padding: 50px; margin-top: 50px; }
+        .footer-logo { color: var(--highlight); font-weight: bold; font-size: 1.5rem; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">
+            <span class="monor-highlight">মনৰ কথা</span> | Tinsukia College Portal
+        </div>
+        <ul class="nav-links">
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('about')">About</a></li>
+            <li><a onclick="showPage('portal')">Portal</a></li>
+            <li><a onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="page-content active-page">
+        <div class="hero">
+            <h1 style="font-size: 4rem;"><span style="color: var(--highlight);">মনৰ কথা</span></h1>
+            <p style="font-size: 1.3rem;">Voices of Students & Staff | Tinsukia College Accountability Initiative</p>
+            <br>
+            <button class="btn-submit" style="width: auto; padding: 15px 50px;" onclick="showPage('portal')">Register Your Voice</button>
+        </div>
+    </div>
+
+    <div id="about" class="page-content">
+        <div class="card">
+            <h2>The Project Vision</h2>
+            <p><strong>মনৰ কথা</strong> is a digital platform for <strong>Tinsukia College</strong>. It empowers the campus community to log thoughts, complaints, and creative ideas into an official digital history, ensuring transparency and institutional growth.</p>
+        </div>
+    </div>
+
+    <div id="portal" class="page-content">
+        <div class="card">
+            <h2>Submit to College History</h2>
+            <form id="submissionForm">
+                <div class="form-grid">
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text" id="userName" placeholder="Enter your name" required>
+                    </div>
+                    <div>
+                        <label>Class/Department</label>
+                        <input type="text" id="userClass" placeholder="e.g. B.Sc 6th Sem" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label>Designation</label>
+                        <select id="userRole">
+                            <option>Student</option>
+                            <option>Faculty Member</option>
+                            <option>College Staff</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Category</label>
+                        <select id="msgType">
+                            <option value="Idea">Creative Idea</option>
+                            <option value="Complaint">Formal Grievance</option>
+                        </select>
+                    </div>
+                </div>
+                <label>Your Message (মনৰ কথা)</label>
+                <textarea id="userMsg" rows="5" placeholder="Share your thought or complaint..." required></textarea>
+                <button type="submit" class="btn-submit">Register Official Record</button>
+            </form>
+        </div>
+
+        <h2 style="margin-top: 40px;">Accountability Feed</h2>
+        <div id="historyFeed">
+            </div>
+    </div>
+
+    <div id="contact" class="page-content">
+        <div class="card">
+            <h2>Tinsukia College Contact Details</h2>
+            <table class="contact-table">
+                <tr>
+                    <td>Institution</td>
+                    <td>Tinsukia College</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>Tinsukia, Assam</td>
+                </tr>
+                <tr>
+                    <td>Contact No.</td>
+                    <td><strong>+91 - 7896334713</strong></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td><a href="mailto:deephzarika175@gmail.com" style="color: var(--highlight); font-weight: bold; text-decoration: none;">deephzarika175@gmail.com</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="secretary-card">
+            <span class="secretary-title">Principal Authority for Student Welfare</span>
+            <div class="secretary-name">Social Service Secretary</div>
+            <p style="margin-top: 10px; color: #64748b; font-weight: 500;">
+                Tinsukia College Students' Union (TCSU)
+            </p>
+            <div style="margin-top: 20px;">
+                <span style="background: var(--gold); color: white; padding: 6px 18px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">CHIEF MODERATOR</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-logo">মনৰ কথা</span>
+        <p>Official Campus Portal | Tinsukia College, Assam</p>
+        <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8;">Support: <a href="mailto:deephzarika175@gmail.com" style="color: white; text-decoration: none;">deephzarika175@gmail.com</a></p>
+        <p style="margin-top: 15px; font-size: 0.75rem; opacity: 0.5;">&copy; 2026 Campus Voice Initiative</p>
+    </footer>
+
+    <script>
+        // Navigation Control
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo(0,0);
+        }
+
+        // Load History from Browser Memory
+        window.onload = function() {
+            const savedData = localStorage.getItem('tcFinalMasterHistory');
+            if (savedData) {
+                document.getElementById('historyFeed').innerHTML = savedData;
+            }
+        };
+
+        // Form Submission Logic
+        document.getElementById('submissionForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('userName').value;
+            const uClass = document.getElementById('userClass').value;
+            const role = document.getElementById('userRole').value;
+            const type = document.getElementById('msgType').value;
+            const msg = document.getElementById('userMsg').value;
+            const date = new Date().toLocaleDateString();
+
+            const entry = document.createElement('div');
+            entry.className = 'feed-item';
+            entry.style.borderLeftColor = (type === 'Complaint') ? 'var(--danger)' : 'var(--gold)';
+
+            entry.innerHTML = `
+                <div class="feed-header">
+                    <div class="user-info">
+                        <strong>${name}</strong> | ${uClass}
+                    </div>
+                    <span class="status-badge">PENDING REVIEW</span>
+                </div>
+                <p><strong>[${type.toUpperCase()}]</strong> ${msg}</p>
+                <div class="feed-meta">
+                    <span>Designation: ${role}</span>
+                    <span>Date: ${date}</span>
+                </div>
+            `;
+
+            const feed = document.getElementById('historyFeed');
+            feed.prepend(entry);
+            localStorage.setItem('tcFinalMasterHistory', feed.innerHTML);
+            this.reset();
+            alert("Entry successfully registered for Tinsukia College History.");
+        };
+    </script>
+</body>
+</html>
